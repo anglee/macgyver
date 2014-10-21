@@ -1,11 +1,14 @@
 (function(angular) {
   var angus = angular.module("angus", []);
-  angus.directive("agApp", function(agKnife, agDebug) {
+  angus.directive("agApp", function(agKnife, agDebug, $interval) {
     return {
       restrict: 'E',
       scope: {},
-      template: "<div>TEST</div>",
+      template: "<div>foo(bind-normal): {{foo}}</div>" +
+          "<div>foo(bind-once): {{::foo}}</div>",
       link: function(scope, element, attrs) {
+
+        // try agKnife
         agKnife.delay(1000)
             .then(function() { return "ABC"; })
             .then(agDebug.log);
@@ -18,6 +21,11 @@
         });
         agKnife.race([delayedP, agKnife.resolve("BBB")])
             .then(agDebug.log);
+
+        scope.foo = 1;
+        $interval(function() {
+          scope.foo++;
+        }, 1000);
       }
     };
   });
