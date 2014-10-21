@@ -44,7 +44,7 @@
         });
       },
       reject: function(foo) {
-        return new $q(function(resolve) {
+        return new $q(function(resolve, reject) {
           reject(foo);
         });
       },
@@ -95,9 +95,8 @@
   });
 
   angus.run(function(agDebug) {
-    window.agDebug = agDebug;
     window.agd = agDebug;
-    window.agKnife = agDebug.agKnife;
+    window.agk = agDebug.agKnife;
   });
 
 })(angular);
