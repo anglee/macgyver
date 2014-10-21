@@ -1,0 +1,17 @@
+{
+  "name": "x-mansion",
+  "version": "0.0.0",
+  "homepage": "https://github.com/anglee/X-Mansion",
+  "authors": [
+    "anglee <ang.lee@gmail.com>"
+  ],
+  "main": "x.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
