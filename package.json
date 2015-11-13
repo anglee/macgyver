@@ -15,5 +15,16 @@
   "bugs": {
     "url": "https://github.com/anglee/macgyver/issues"
   },
-  "homepage": "https://github.com/anglee/macgyver#readme"
+  "homepage": "https://github.com/anglee/macgyver#readme",
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "react": "^0.14.2",
+    "react-redux": "^4.0.0",
+    "redux": "^3.0.4"
+  },
+  "devDependencies": {
+    "babel-core": "^6.1.20",
+    "babel-loader": "^6.1.0",
+    "webpack": "^1.12.4"
+  }
 }
