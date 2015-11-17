@@ -2,7 +2,7 @@ var path = require('path');
 
 module.exports = {
 	devtool: 'eval-source-map',
-	entry: './src/angus.js',
+	entry: './app/app.js',
 	output: {
 		path: path.join(__dirname, 'dist'),
 		filename: 'bundle.js',
@@ -11,8 +11,8 @@ module.exports = {
 	module: {
 		loaders: [{
 			test: /\.js$/,
-			loaders: ['babel'],
-			include: path.join(__dirname, 'src')
+			loaders: ['babel-loader'],
+			include: path.join(__dirname, 'app')
 		}]
 	}
 };
