@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Greeting from "./greeting";
-
+import Notebook from "./Notebook";
+import NotebookModelFactory from "./NotebookModel";
+console.log("NotebookModelFactory", NotebookModelFactory);
 ReactDOM.render(
-		<Greeting name="World"/>,
+		<Notebook notebook-model-factory={NotebookModelFactory}/>,
 		document.getElementById('root')
 );
