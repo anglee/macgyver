@@ -3,12 +3,7 @@ import CodeCell from "./CodeCell";
 
 export default React.createClass({
 	getInitialState() {
-		const modelFactory = this.props['notebook-model-factory'];
-		console.log(modelFactory);
-		const model = modelFactory.getNotebookModel();
-		console.log(model);
 		return {
-			model
 		};
 	},
 	render: function () {
@@ -16,7 +11,7 @@ export default React.createClass({
 				<div>
 					<pre>
 						{
-								JSON.stringify(this.state.model)
+								JSON.stringify(this.props.model)
 						}
 					</pre>
 					<CodeCell></CodeCell>
