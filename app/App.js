@@ -15,17 +15,18 @@ export default React.createClass({
 			this.setState({
 				model
 			});
-		}, 1000);
+		}, 600);
 	},
 	render: function () {
 		return (
 				<div>
-					<pre>
+					<header>App</header>
+					<pre className="debug">
 						{
 							JSON.stringify(this.state.model)
 						}
 					</pre>
-					<Notebook notebook-model={ this.state.model }></Notebook>
+					<Notebook model={ this.state.model }></Notebook>
 				</div>
 		);
 	},

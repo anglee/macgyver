@@ -2,7 +2,16 @@ import React from 'react';
 
 var OutputCell = React.createClass({
 	render() {
-		return (<div>Output Cell</div>);
+		return (
+				<div>
+					<header>OutputCell</header>
+						<pre className="debug">
+							{
+								JSON.stringify(this.props.model)
+							}
+						</pre>
+				</div>
+		);
 	}
 });
 

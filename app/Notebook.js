@@ -1,20 +1,28 @@
+import _ from "lodash";
 import React from "react";
 import CodeCell from "./CodeCell";
 
 export default React.createClass({
 	getInitialState() {
-		return {
-		};
+		return {};
 	},
 	render: function () {
+		console.log(this.props.model);
+		const { cells } = this.props.model;
+		console.log(cells);
 		return (
 				<div>
-					<pre>
+					<header>Notebook</header>
+					<pre className="debug">
 						{
-								JSON.stringify(this.props.model)
+							JSON.stringify(this.props.model)
 						}
 					</pre>
-					<CodeCell></CodeCell>
+					{
+						_.map(cells, (cell) => {
+							return <CodeCell model={ cell } key={ cell.id }></CodeCell>
+						})
+					}
 				</div>
 		);
 	},
