@@ -9,15 +9,24 @@ export default React.createClass({
 		};
 	},
 	componentDidMount() {
+
+		this.unsubscribe = this.props.store.subscribe(() => {
+			this.setState({
+				isDebugging: this.props.store.getState().isDebugging
+			});
+		});
+
 		const model = NotebookModelFactory.getNotebookModel();
 		setTimeout(() => {
-			"use strict";
 			this.setState({
 				model
 			});
 		}, 600);
 	},
-	render: function () {
+	componentWillUnmount() {
+		this.unsubscribe();
+	},
+	render() {
 		return (
 				<div>
 					<header>App</header>
@@ -26,8 +35,15 @@ export default React.createClass({
 							JSON.stringify(this.state.model)
 						}
 					</pre>
+					<div>{ `Debugging = ${this.state.isDebugging}` } </div>
+					<button onClick={this.toggleDebugging}>Debug</button>
 					<Notebook model={ this.state.model }></Notebook>
 				</div>
 		);
 	},
+	toggleDebugging() {
+		this.props.store.dispatch({
+			type: 'TOGGLE_DEBUGGING'
+		});
+	}
 });

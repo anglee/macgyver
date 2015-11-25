@@ -7,9 +7,7 @@ export default React.createClass({
 		return {};
 	},
 	render: function () {
-		console.log(this.props.model);
 		const { cells } = this.props.model;
-		console.log(cells);
 		return (
 				<div>
 					<header>Notebook</header>
