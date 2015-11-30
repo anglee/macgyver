@@ -1,0 +1,1 @@
+- I didn't find a good way to do dependency injection of services that controls a global state for things like isDebugging. I did find the [React context](https://facebook.github.io/react/docs/context.html), but it is marked as *advanced and experimental*. I ended up passing the isDebugging state through props but I am not sure if it is a good idea.

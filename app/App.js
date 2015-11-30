@@ -30,14 +30,17 @@ export default React.createClass({
 		return (
 				<div>
 					<header>App</header>
-					<pre className="debug">
+					<pre className={ this.state.isDebugging ? "" : "hidden" }>
 						{
 							JSON.stringify(this.state.model)
 						}
 					</pre>
 					<div>{ `Debugging = ${this.state.isDebugging}` } </div>
 					<button onClick={this.toggleDebugging}>Debug</button>
-					<Notebook model={ this.state.model }></Notebook>
+					<Notebook
+							model={ this.state.model }
+							isDebugging={ this.state.isDebugging }>
+					</Notebook>
 				</div>
 		);
 	},

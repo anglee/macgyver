@@ -7,7 +7,7 @@ var CodeCell = React.createClass({
 		const model = this.props.model;
 		return (<div>
 			<header>CodeCell</header>
-				<pre className="debug">
+				<pre className={ this.props.isDebugging ? "" : "hidden" }>
 					{
 						JSON.stringify(model)
 					}
