@@ -13,25 +13,38 @@ const defaultState = {
 	loadingStatus: ''
 };
 
-const reducer = (state = defaultState, action) => {
-
+const isDebuggingReducer = (state = {}, action) => {
 	if (action.type === 'TOGGLE_DEBUGGING') {
-		return _.assign({}, state, {
-			isDebugging: !state.isDebugging
-		});
-	} else if (action.type === 'LOAD_NOTEBOOK_MODEL_ISSUED') {
-		return _.assign({}, state, {
-			loadingStatus: 'loading...'
-		});
-	} else if (action.type === 'LOAD_NOTEBOOK_MODEL_DONE') {
-		return _.assign({}, state, {
-			notebookModel: action.model,
-			loadingStatus: ''
-		});
+		return state = !state;
 	} else {
 		return state;
 	}
+};
 
+const notebookModelReducer = (state = {}, action) => {
+	if (action.type === 'LOAD_NOTEBOOK_MODEL_DONE') {
+		return action.model;
+	} else {
+		return state;
+	}
+};
+
+const loadingStatusReducer = (state = {}, action) => {
+	if (action.type === 'LOAD_NOTEBOOK_MODEL_ISSUED') {
+		return 'loading...';
+	} if (action.type === 'LOAD_NOTEBOOK_MODEL_DONE') {
+		return 'loaded';
+	}else {
+		return state;
+	}
+};
+
+const reducer = (state = defaultState, action) => {
+	return {
+		isDebugging: isDebuggingReducer(state.isDebugging, action),
+		notebookModel: notebookModelReducer(state.notebookModel, action),
+		loadingStatus: loadingStatusReducer(state.loadingStatus, action)
+	};
 };
 
 
