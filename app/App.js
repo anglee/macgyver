@@ -12,16 +12,25 @@ export default React.createClass({
 
 		this.unsubscribe = this.props.store.subscribe(() => {
 			this.setState({
-				isDebugging: this.props.store.getState().isDebugging
+				isDebugging: this.props.store.getState().isDebugging,
+				model: this.props.store.getState().notebookModel,
+				loadingStatus: this.props.store.getState().loadingStatus
 			});
 		});
 
-		const model = NotebookModelFactory.getNotebookModel();
-		setTimeout(() => {
-			this.setState({
-				model
+		this.props.store.dispatch(function (dispatch) {
+			dispatch({
+				type: 'LOAD_NOTEBOOK_MODEL_ISSUED'
 			});
-		}, 600);
+
+			setTimeout(() => {
+				dispatch({
+					type: 'LOAD_NOTEBOOK_MODEL_DONE',
+					model: NotebookModelFactory.getNotebookModel()
+				});
+			}, 1500);
+		});
+
 	},
 	componentWillUnmount() {
 		this.unsubscribe();
@@ -29,17 +38,19 @@ export default React.createClass({
 	render() {
 		return (
 				<div>
+					<button onClick={this.toggleDebugging}>Debug</button>
+					<div>{ `Debugging = ${this.state.isDebugging}` } </div>
+
 					<header>App</header>
 					<pre className={ this.state.isDebugging ? "" : "hidden" }>
 						{
 							JSON.stringify(this.state.model)
 						}
 					</pre>
-					<div>{ `Debugging = ${this.state.isDebugging}` } </div>
-					<button onClick={this.toggleDebugging}>Debug</button>
 					<Notebook
 							model={ this.state.model }
-							isDebugging={ this.state.isDebugging }>
+							isDebugging={ this.state.isDebugging }
+							loadingStatus={ this.state.loadingStatus }>
 					</Notebook>
 				</div>
 		);

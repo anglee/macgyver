@@ -16,6 +16,9 @@ export default React.createClass({
 							JSON.stringify(this.props.model)
 						}
 					</pre>
+					<div>
+						Loading Status: { this.props.loadingStatus }
+					</div>
 					{
 						_.map(cells, (cell) => {
 							return <CodeCell
