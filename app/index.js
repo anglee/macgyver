@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import App from "./App";
 //import { createStore } from 'redux';
 //import thunk from 'redux-thunk';
-import { combineReducers } from 'redux';
+//import { combineReducers } from 'redux';
 
 "use strict";
 
@@ -39,6 +39,13 @@ const loadingStatusReducer = (state = {}, action) => {
 	} else {
 		return state;
 	}
+};
+
+const combineReducers = (reducers) => {
+	return (state = {}, action) => _.reduce(reducers, (nextState, reducer, key) => {
+		nextState[key] = reducer(state[key], action);
+		return nextState;
+		}, {});
 };
 
 const reducer = combineReducers({
