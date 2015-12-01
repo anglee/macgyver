@@ -43,8 +43,8 @@ export default React.createClass({
 
 					<header>App</header>
 					<pre className={ this.state.isDebugging ? "" : "hidden" }>
-						{
-							JSON.stringify(this.state.model)
+						state = {
+							JSON.stringify(this.state)
 						}
 					</pre>
 					<Notebook

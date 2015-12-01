@@ -8,7 +8,7 @@ var CodeCell = React.createClass({
 		return (<div>
 			<header>CodeCell</header>
 				<pre className={ this.props.isDebugging ? "" : "hidden" }>
-					{
+					state = {
 						JSON.stringify(model)
 					}
 				</pre>

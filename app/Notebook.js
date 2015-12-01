@@ -12,7 +12,7 @@ export default React.createClass({
 				<div>
 					<header>Notebook</header>
 					<pre className={ this.props.isDebugging ? "" : "hidden" }>
-						{
+						state = {
 							JSON.stringify(this.props.model)
 						}
 					</pre>
