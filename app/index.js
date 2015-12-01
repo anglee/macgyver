@@ -40,25 +40,25 @@ const createStore = (reducer) => {
 	let state;
 	let subscribers = [];
 
-	return {
-		getState() {
-			return state;
-		},
-		dispatch(action) {
-			if (!_.isFunction(action)) {
-				state = reducer(state, action);
-				subscribers.forEach(listener => listener());
-			} else {
-				action(this.dispatch);
-			}
-		},
-		subscribe(subscriber) {
-			subscribers.push(subscriber);
-			return function () {
-				subscribers = _.reject(subscribers, subscriber);
-			};
+	const getState = () => state;
+	const dispatch = (action) => {
+		if (!_.isFunction(action)) {
+			state = reducer(state, action);
+			subscribers.forEach(listener => listener());
+		} else {
+			action(dispatch);
 		}
 	};
+	const subscribe = (subscriber) => {
+		subscribers.push(subscriber);
+		return function () {
+			subscribers = _.reject(subscribers, subscriber);
+		};
+	};
+
+	dispatch({});
+
+	return { getState, dispatch, subscribe };
 };
 
 const store = createStore(reducer);
