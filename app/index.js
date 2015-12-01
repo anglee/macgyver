@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import App from "./App";
 //import { createStore } from 'redux';
 //import thunk from 'redux-thunk';
+import { combineReducers } from 'redux';
 
 "use strict";
 
@@ -32,20 +33,27 @@ const notebookModelReducer = (state = {}, action) => {
 const loadingStatusReducer = (state = {}, action) => {
 	if (action.type === 'LOAD_NOTEBOOK_MODEL_ISSUED') {
 		return 'loading...';
-	} if (action.type === 'LOAD_NOTEBOOK_MODEL_DONE') {
+	}
+	if (action.type === 'LOAD_NOTEBOOK_MODEL_DONE') {
 		return 'loaded';
-	}else {
+	} else {
 		return state;
 	}
 };
 
-const reducer = (state = defaultState, action) => {
-	return {
-		isDebugging: isDebuggingReducer(state.isDebugging, action),
-		notebookModel: notebookModelReducer(state.notebookModel, action),
-		loadingStatus: loadingStatusReducer(state.loadingStatus, action)
-	};
-};
+const reducer = combineReducers({
+	isDebugging: isDebuggingReducer,
+	notebookModel: notebookModelReducer,
+	loadingStatus: loadingStatusReducer
+});
+
+//const reducer = (state = defaultState, action) => {
+//	return {
+//		isDebugging: isDebuggingReducer(state.isDebugging, action),
+//		notebookModel: notebookModelReducer(state.notebookModel, action),
+//		loadingStatus: loadingStatusReducer(state.loadingStatus, action)
+//	};
+//};
 
 
 const createStore = (reducer) => {
@@ -71,7 +79,7 @@ const createStore = (reducer) => {
 
 	dispatch({});
 
-	return { getState, dispatch, subscribe };
+	return {getState, dispatch, subscribe};
 };
 
 const store = createStore(reducer);
