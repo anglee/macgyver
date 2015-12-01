@@ -6,12 +6,22 @@ export default React.createClass({
 	getInitialState() {
 		return {};
 	},
+	componentDidMount() {
+		this.unsubscribe = this.props.store.subscribe(() => {
+			this.setState({
+				isDebugging: this.props.store.getState().isDebugging
+			});
+		});
+	},
+	componentWillUnmount() {
+		this.unsubscribe();
+	},
 	render: function () {
 		const { cells } = this.props.model;
 		return (
 				<div>
 					<header>Notebook</header>
-					<pre className={ this.props.isDebugging ? "" : "hidden" }>
+					<pre className={ this.state.isDebugging ? "" : "hidden" }>
 						{
 							JSON.stringify(this.props.model)
 						}
@@ -21,7 +31,7 @@ export default React.createClass({
 							return <CodeCell
 									model={ cell }
 									key={ cell.id }
-									isDebugging={ this.props.isDebugging }>
+									store={ this.props.store }>
 							</CodeCell>
 						})
 					}

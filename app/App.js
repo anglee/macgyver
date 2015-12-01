@@ -39,7 +39,7 @@ export default React.createClass({
 					<button onClick={this.toggleDebugging}>Debug</button>
 					<Notebook
 							model={ this.state.model }
-							isDebugging={ this.state.isDebugging }>
+							store={this.props.store}>
 					</Notebook>
 				</div>
 		);
