@@ -28,7 +28,7 @@ export default React.createClass({
 					type: 'LOAD_NOTEBOOK_MODEL_DONE',
 					model: NotebookModelFactory.getNotebookModel()
 				});
-			}, 1500);
+			}, 500);
 		});
 
 	},
@@ -50,8 +50,9 @@ export default React.createClass({
 					<Notebook
 							model={ this.state.model }
 							isDebugging={ this.state.isDebugging }
-							loadingStatus={ this.state.loadingStatus }>
-					</Notebook>
+							loadingStatus={ this.state.loadingStatus }
+							store={ this.props.store }
+					/>
 				</div>
 		);
 	},

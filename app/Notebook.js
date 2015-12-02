@@ -2,11 +2,19 @@ import _ from "lodash";
 import React from "react";
 import CodeCell from "./CodeCell";
 
+let nextCellId = 3;
+
 export default React.createClass({
 	getInitialState() {
 		return {};
 	},
-	render: function () {
+	appendNewCell() {
+		this.props.store.dispatch({
+			type: 'APPEND_NEW_CELL',
+			cellId: nextCellId++
+		});
+	},
+	render() {
 		const { cells } = this.props.model;
 		return (
 				<div>
@@ -28,6 +36,7 @@ export default React.createClass({
 							</CodeCell>
 						})
 					}
+					<button onClick={ this.appendNewCell }>New Cell</button>
 				</div>
 		);
 	},

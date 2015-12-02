@@ -25,6 +25,15 @@ const isDebuggingReducer = (state = {}, action) => {
 const notebookModelReducer = (state = {}, action) => {
 	if (action.type === 'LOAD_NOTEBOOK_MODEL_DONE') {
 		return action.model;
+	} else if (action.type === 'APPEND_NEW_CELL') {
+		const newCell = {
+			id: action.cellId,
+			input: 'placeholder input for cell ' + action.cellId,
+			output: 'placeholder output for cell ' + action.cellId
+		};
+		return {
+			cells: [...state.cells, newCell]
+		};
 	} else {
 		return state;
 	}
