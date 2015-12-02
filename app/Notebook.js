@@ -32,8 +32,9 @@ export default React.createClass({
 							return <CodeCell
 									model={ cell }
 									key={ cell.id }
-									isDebugging={ this.props.isDebugging }>
-							</CodeCell>
+									isDebugging={ this.props.isDebugging }
+									store={ this.props.store }
+							/>
 						})
 					}
 					<button onClick={ this.appendNewCell }>New Cell</button>

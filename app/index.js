@@ -1,3 +1,5 @@
+"use strict";
+
 import _ from 'lodash';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -5,8 +7,6 @@ import App from "./App";
 //import { createStore } from 'redux';
 //import thunk from 'redux-thunk';
 //import { combineReducers } from 'redux';
-
-"use strict";
 
 const defaultState = {
 	isDebugging: true,
@@ -33,6 +33,10 @@ const notebookModelReducer = (state = {}, action) => {
 		};
 		return {
 			cells: [...state.cells, newCell]
+		};
+	} else if (action.type === 'REMOVE_CELL') {
+		return {
+			cells: _.reject(_.clone(state.cells), cell => cell.id === action.cellId)
 		};
 	} else {
 		return state;
