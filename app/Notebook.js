@@ -11,24 +11,23 @@ export default React.createClass({
 		this.props.store.dispatch(createAppendNewCellAction());
 	},
 	render() {
-		const { cells } = this.props.model;
+		const { cells } = this.props.store.getState().notebookModel;
 		return (
 				<div>
 					<header>Notebook</header>
-					<pre className={ this.props.isDebugging ? "" : "hidden" }>
+					<pre className={ this.props.store.getState().isDebugging ? "" : "hidden" }>
 						state = {
-						JSON.stringify(this.props.model)
-					}
+							JSON.stringify(this.props.store.getState().notebookModel)
+						}
 					</pre>
 					<div>
-						Loading Status: { this.props.loadingStatus }
+						Loading Status: { JSON.stringify(this.props.store.getState().loadingStatus) }
 					</div>
 					{
 						_.map(cells, (cell) => {
 							return <CodeCell
 									model={ cell }
 									key={ cell.id }
-									isDebugging={ this.props.isDebugging }
 									store={ this.props.store }
 							/>
 						})

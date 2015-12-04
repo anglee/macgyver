@@ -15,11 +15,7 @@ export default React.createClass({
 	componentDidMount() {
 
 		this.unsubscribe = this.props.store.subscribe(() => {
-			this.setState({
-				isDebugging: this.props.store.getState().isDebugging,
-				model: this.props.store.getState().notebookModel,
-				loadingStatus: this.props.store.getState().loadingStatus
-			});
+			this.forceUpdate();
 		});
 
 		this.props.store.dispatch(function (dispatch) {
@@ -38,20 +34,13 @@ export default React.createClass({
 		return (
 				<div>
 					<button onClick={this.toggleDebugging}>Debug</button>
-					<div>{ `Debugging = ${this.state.isDebugging}` } </div>
+					<div>{ `Debugging = ${this.props.store.getState().isDebugging}` } </div>
 
 					<header>App</header>
-					<pre className={ this.state.isDebugging ? "" : "hidden" }>
-						state = {
-						JSON.stringify(this.state)
-					}
+					<pre className={ this.props.store.getState().isDebugging ? "" : "hidden" }>
+						state = { JSON.stringify(this.props.store.getState()) }
 					</pre>
-					<Notebook
-							model={ this.state.model }
-							isDebugging={ this.state.isDebugging }
-							loadingStatus={ this.state.loadingStatus }
-							store={ this.props.store }
-					/>
+					<Notebook store={ this.props.store } />
 				</div>
 		);
 	},
