@@ -15,7 +15,7 @@ const defaultState = {
 	loadingStatus: ''
 };
 
-const isDebuggingReducer = (state = {}, action) => {
+const isDebuggingReducer = (state = true, action) => {
 	if (action.type === 'TOGGLE_DEBUGGING') {
 		return state = !state;
 	} else {
@@ -45,7 +45,7 @@ const notebookModelReducer = (state = {}, action) => {
 	}
 };
 
-const loadingStatusReducer = (state = {}, action) => {
+const loadingStatusReducer = (state = "", action) => {
 	if (action.type === 'LOAD_NOTEBOOK_MODEL_ISSUED') {
 		return 'loading...';
 	}
