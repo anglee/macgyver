@@ -1,18 +1,14 @@
 import _ from "lodash";
 import React from "react";
 import CodeCell from "./CodeCell";
-
-let nextCellId = 3;
+import { createAppendNewCellAction } from "./actions";
 
 export default React.createClass({
 	getInitialState() {
 		return {};
 	},
 	appendNewCell() {
-		this.props.store.dispatch({
-			type: 'APPEND_NEW_CELL',
-			cellId: nextCellId++
-		});
+		this.props.store.dispatch(createAppendNewCellAction());
 	},
 	render() {
 		const { cells } = this.props.model;
@@ -21,8 +17,8 @@ export default React.createClass({
 					<header>Notebook</header>
 					<pre className={ this.props.isDebugging ? "" : "hidden" }>
 						state = {
-							JSON.stringify(this.props.model)
-						}
+						JSON.stringify(this.props.model)
+					}
 					</pre>
 					<div>
 						Loading Status: { this.props.loadingStatus }

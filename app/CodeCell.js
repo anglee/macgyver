@@ -3,6 +3,7 @@
 import React from 'react';
 import InputCell from './InputCell';
 import OutputCell from './OutputCell';
+import { createRemoteCellAction } from "./actions";
 
 var CodeCell = React.createClass({
 	render() {
@@ -21,10 +22,7 @@ var CodeCell = React.createClass({
 	},
 	remove() {
 		const model = this.props.model;
-		this.props.store.dispatch({
-			type: 'REMOVE_CELL',
-			cellId: model.id
-		});
+		this.props.store.dispatch(createRemoteCellAction(model.id));
 	}
 });
 

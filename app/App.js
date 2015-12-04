@@ -1,6 +1,10 @@
 import React from "react";
 import Notebook from "./Notebook";
-import NotebookModelFactory from "./NotebookModel";
+import {
+		createLoadNotebookIssuedAction,
+		createLoadNotebookDoneAction,
+		createToggleDebuggingAction
+} from "./actions";
 
 export default React.createClass({
 	getInitialState() {
@@ -19,15 +23,10 @@ export default React.createClass({
 		});
 
 		this.props.store.dispatch(function (dispatch) {
-			dispatch({
-				type: 'LOAD_NOTEBOOK_MODEL_ISSUED'
-			});
+			dispatch(createLoadNotebookIssuedAction());
 
 			setTimeout(() => {
-				dispatch({
-					type: 'LOAD_NOTEBOOK_MODEL_DONE',
-					model: NotebookModelFactory.getNotebookModel()
-				});
+				dispatch(createLoadNotebookDoneAction());
 			}, 500);
 		});
 
@@ -44,8 +43,8 @@ export default React.createClass({
 					<header>App</header>
 					<pre className={ this.state.isDebugging ? "" : "hidden" }>
 						state = {
-							JSON.stringify(this.state)
-						}
+						JSON.stringify(this.state)
+					}
 					</pre>
 					<Notebook
 							model={ this.state.model }
@@ -57,8 +56,6 @@ export default React.createClass({
 		);
 	},
 	toggleDebugging() {
-		this.props.store.dispatch({
-			type: 'TOGGLE_DEBUGGING'
-		});
+		this.props.store.dispatch(createToggleDebuggingAction());
 	}
 });

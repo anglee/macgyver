@@ -4,6 +4,7 @@ import _ from 'lodash';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from "./App";
+import { types } from './actions'
 //import { createStore } from 'redux';
 //import thunk from 'redux-thunk';
 //import { combineReducers } from 'redux';
@@ -23,9 +24,10 @@ const isDebuggingReducer = (state = {}, action) => {
 };
 
 const notebookModelReducer = (state = {}, action) => {
+
 	if (action.type === 'LOAD_NOTEBOOK_MODEL_DONE') {
 		return action.model;
-	} else if (action.type === 'APPEND_NEW_CELL') {
+	} else if (action.type === types.APPEND_NEW_CELL) {
 		const newCell = {
 			id: action.cellId,
 			input: 'placeholder input for cell ' + action.cellId,
@@ -109,7 +111,5 @@ const store = createStore(reducer);
 //		thunk
 //)(createStore);
 //const store = createStoreWithMiddleware(reducer);
-
-console.log(store.getState());
 
 ReactDOM.render(<App store={store}/>, document.getElementById('root'));
