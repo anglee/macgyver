@@ -12,10 +12,11 @@ export default React.createClass({
 	},
 	render() {
 		const { cells } = this.props.store.getState().notebookModel;
+		const isDebugging = this.props.store.getState().isDebugging;
 		return (
 				<div>
 					<header>Notebook</header>
-					<pre className={ this.props.store.getState().isDebugging ? "" : "hidden" }>
+					<pre className={ isDebugging ? "" : "hidden" }>
 						state = {
 							JSON.stringify(this.props.store.getState().notebookModel)
 						}
@@ -28,7 +29,10 @@ export default React.createClass({
 							return <CodeCell
 									model={ cell }
 									key={ cell.id }
-									store={ this.props.store }
+									input={ cell.input }
+									output={ cell.output }
+									isDebugging={isDebugging}
+									onRemove={() => { this.props.onRemoveCell(cell.id); }}
 							/>
 						})
 					}

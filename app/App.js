@@ -3,7 +3,8 @@ import Notebook from "./Notebook";
 import {
 		createLoadNotebookIssuedAction,
 		createLoadNotebookDoneAction,
-		createToggleDebuggingAction
+		createToggleDebuggingAction,
+		createRemoteCellAction
 } from "./actions";
 
 export default React.createClass({
@@ -40,7 +41,10 @@ export default React.createClass({
 					<pre className={ this.props.store.getState().isDebugging ? "" : "hidden" }>
 						state = { JSON.stringify(this.props.store.getState()) }
 					</pre>
-					<Notebook store={ this.props.store } />
+					<Notebook
+							store={ this.props.store }
+							onRemoveCell={(cellId) => this.props.store.dispatch(createRemoteCellAction(cellId)) }
+					/>
 				</div>
 		);
 	},
